@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>Main</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ dados.name|capitalize }} - PokéDex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <p>{{ dados }}</p>
+
+    <div class="card">
+        <h1>{{ dados.name|capitalize }} <small style="color: #888; font-size: 0.6em;">#{{ dados.id }}</small></h1>
+
+        <div class="card-body">
+
+            <div class="card-column">
+
+                <img id="pokemon-img" src="{{ dados.sprites.front_default }}" alt="Imagem de {{ dados.name }}">
+
+                <button onclick="toggleShiny()" class="btn-shiny">
+                    ✨ Shiny
+                </button>
+
+                <ul>
+                    {% for t in dados.types %}
+                        <li class="type-badge type-{{ t.type.name }}">{{ t.type.name|capitalize }}</li>
+                    {% endfor %}
+                </ul>
+
+                <div class="info-row">
+                    <div>
+                        <strong style="color:#555">Altura</strong><br>
+                        {{ dados.height / 10 }} m
+                    </div>
+                    <div>
+                        <strong style="color:#555">Peso</strong><br>
+                        {{ dados.weight / 10 }} kg
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-column">
+
+                <div class="stats-container">
+                    <h3>Base Stats</h3>
+
+                    {% for s in dados.stats %}
+                        <div class="stat-row stat-{{ s.stat.name }}">
+                            <span class="stat-name">{{ s.stat.name|replace('-', ' ') }}</span>
+                            <span style="width: 30px; text-align: right; font-size: 0.8em; margin-right: 5px;">{{ s.base_stat }}</span>
+                            <div class="stat-bar-bg">
+                                <div class="stat-bar-fill" style="width: {{ (s.base_stat / 255) * 100 }}%;"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% if dados.weaknesses %}
+                <div class="weakness-container">
+                    <h3>Fraquezas</h3>
+                    <div class="weakness-grid">
+                        {% for type_name, multiplier in dados.weaknesses.items() %}
+                            <div class="weakness-item">
+                                <span class="type-mini type-{{ type_name }}">{{ type_name|capitalize }}</span>
+                                <span class="multiplier {% if multiplier >= 4 %}multiplier-4x{% endif %}">
+                                    {{ multiplier|int }}x
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+            </div> </div> <div class="nav-container">
+            {% if dados.id > 1 %}
+                <a href="{{ url_for('principal.index', pokemon=dados.id - 1) }}" class="btn-nav">
+                    <span>←</span> Anterior
+                </a>
+            {% else %}
+                <div></div> {% endif %}
+
+            <a href="{{ url_for('principal.home') }}" style="color: #888; text-decoration: none; font-size: 0.9em;">Home</a>
+
+            <a href="{{ url_for('principal.index', pokemon=dados.id + 1) }}" class="btn-nav">
+                Próximo <span>→</span>
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        let isShiny = false;
+        const imgElement = document.getElementById('pokemon-img');
+
+        const normalSprite = "{{ dados.sprites.front_default }}";
+        const shinySprite = "{{ dados.sprites.front_shiny }}";
+
+        function toggleShiny() {
+            if (isShiny) {
+                imgElement.src = normalSprite;
+                isShiny = false;
+            } else {
+                imgElement.src = shinySprite;
+                isShiny = true;
+            }
+        }
+    </script>
 </body>
 </html>

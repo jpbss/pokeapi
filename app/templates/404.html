@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Não Encontrado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="card" style="border-color: red;">
+        <h1>Oops!</h1>
+
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png" alt="Psyduck Confuso">
+
+        <h3>Pokémon não encontrado</h3>
+        <p>Parece que este Pokémon fugiu ou não existe.</p>
+
+        <br>
+        <a href="{{ url_for('principal.home') }}" class="btn-voltar">← Tentar outra busca</a>
+    </div>
+
+</body>
+</html>

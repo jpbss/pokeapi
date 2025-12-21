@@ -1,0 +1,418 @@
+/* =========================================
+   1. ESTILOS GERAIS
+   ========================================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* =========================================
+   2. PÁGINA DO POKÉMON (index.html)
+   ========================================= */
+.card {
+    display: inline-block;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    max-width: 800px;
+    width: 90%;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.card h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.card-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.card-column {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+}
+
+.card img {
+    width: 200px;
+    height: 200px;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: contain;
+    padding: 15px;
+    border: 1px solid #eee;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+li {
+    margin: 0;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.stats-container {
+    text-align: left;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.stats-container h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #444;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-shiny {
+    display: block;
+    margin: 0 auto 15px auto;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #ddd;
+    color: #555;
+    font-size: 0.9em;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-shiny:hover {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffecb3 100%);
+    border-color: #ffc107;
+    color: #856404;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
+}
+
+/* =========================================
+   3. PÁGINA DE PESQUISA (home.html)
+   ========================================= */
+.search-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.logo {
+    width: 70%;
+    max-width: 300px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.autocomplete-container {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 18px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #3b4cca;
+    box-shadow: 0 0 8px rgba(59, 76, 202, 0.2);
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    background-color: #ffcb05;
+    color: #2a3b96;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.1s, background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background-color: #f0bd00;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   4. LISTA DE AUTOCOMPLETE
+   ========================================= */
+.suggestions-box {
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 1000;
+    display: none;
+    text-align: left;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f9f9f9;
+    transition: background-color 0.2s;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    object-fit: contain;
+}
+
+.suggestion-item span {
+    text-transform: capitalize;
+    font-weight: 500;
+    color: #333;
+}
+
+.suggestion-item:hover, .suggestion-active {
+    background-color: #f0f4ff;
+    color: #3b4cca;
+}
+
+/* =========================================
+   5. CORES DOS TIPOS (Type Colors)
+   ========================================= */
+
+.type-badge {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.type-normal   { background-color: #A8A77A; }
+.type-fire     { background-color: #EE8130; }
+.type-water    { background-color: #6390F0; }
+.type-electric { background-color: #F7D02C; color: #333; }
+.type-grass    { background-color: #7AC74C; }
+.type-ice      { background-color: #96D9D6; color: #333; }
+.type-fighting { background-color: #C22E28; }
+.type-poison   { background-color: #A33EA1; }
+.type-ground   { background-color: #E2BF65; }
+.type-flying   { background-color: #A98FF3; }
+.type-psychic  { background-color: #F95587; }
+.type-bug      { background-color: #A6B91A; }
+.type-rock     { background-color: #B6A136; }
+.type-ghost    { background-color: #735797; }
+.type-dragon   { background-color: #6F35FC; }
+.type-dark     { background-color: #705746; }
+.type-steel    { background-color: #B7B7CE; color: #333; }
+.type-fairy    { background-color: #D685AD; }
+
+/* =========================================
+   6. BARRAS DE STATUS (Base Stats)
+   ========================================= */
+.stats-container {
+    text-align: left;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+}
+
+.stat-name {
+    width: 100px;
+    font-weight: bold;
+    color: #555;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+.stat-bar-bg {
+    flex-grow: 1;
+    background-color: #eee;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
+
+.stat-hp .stat-bar-fill { background-color: #FF5959; }
+.stat-attack .stat-bar-fill { background-color: #F5AC78; }
+.stat-defense .stat-bar-fill { background-color: #FAE078; }
+.stat-speed .stat-bar-fill { background-color: #FA92B2; }
+
+/* =========================================
+   7. BOTÕES DE NAVEGAÇÃO (Prev/Next)
+   ========================================= */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.btn-nav {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background-color: #f8f9fa;
+    color: #555;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.btn-nav:hover {
+    background-color: #3b4cca;
+    color: white;
+    border-color: #3b4cca;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-nav span {
+    margin: 0 5px;
+}
+
+/* =========================================
+   8. MATRIZ DE FRAQUEZAS (Ajustado)
+   ========================================= */
+.weakness-container {
+    margin-top: 20px;
+    padding-top: 0;
+    border-top: none;
+}
+
+.weakness-container h3 {
+    text-align: left;
+    color: #444;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+.weakness-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
+    justify-content: start;
+}
+
+.weakness-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid #eee;
+    transition: transform 0.2s;
+}
+
+.weakness-item:hover {
+    transform: translateY(-2px);
+    border-color: #ddd;
+}
+
+.type-mini {
+    font-size: 0.7em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: white;
+    text-transform: capitalize;
+    margin-bottom: 4px;
+    width: 100%;
+    text-align: center;
+}
+
+.multiplier {
+    font-weight: bold;
+    font-size: 1em;
+    color: #555;
+}
+
+.multiplier-4x {
+    color: #d32f2f;
+    font-weight: 800;
+}
