@@ -1,41 +1,51 @@
-# Visualizador de Pokémon (PokeAPI)
+# ⚡ PokéDex Web App
 
-Este é um projeto pessoal desenvolvido por um fã de Pokémon. Trata-se de uma aplicação web construída em **Python (Flask)** que consome a API pública [PokeAPI](https://pokeapi.co/) para listar, pesquisar e exibir detalhes sobre os Pokémon.
+![Badge Status](http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=GREEN&style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-O diferencial deste projeto é o algoritmo de cálculo de fraquezas, que cruza os tipos do Pokémon para determinar os multiplicadores de dano reais.
+> *"Gotta Catch 'Em All!"*
 
-## Funcionalidades
+Este é um projeto pessoal desenvolvido pela simples paixão por **Pokémon** e tecnologia. O objetivo foi criar uma Pokédex interativa que não fosse apenas uma lista de dados, mas que trouxesse uma experiência visual rica e funcionalidades úteis para treinadores, como o cálculo real de fraquezas.
 
-* **Catálogo Completo:** Carrega e lista os nomes de todos os Pokémon disponíveis na API.
-* **Busca:** Permite pesquisar um Pokémon específico pelo nome.
-* **Detalhes e Fraquezas:** Exibe os dados do Pokémon e calcula automaticamente as suas fraquezas acumuladas (ex: dano x2, x4) com base nos seus tipos e nas relações de dano (dano duplo, meio dano, imunidade).
-* **Otimização:** Implementação de cache em memória para armazenar a lista de nomes e dados de tipos, reduzindo o número de requisições externas.
+A aplicação consome a [PokeAPI](https://pokeapi.co/) e foi construída utilizando **Python (Flask)** no back-end e **CSS** no front-end.
 
-## Tecnologias Utilizadas
+## 🎨 Destaques de Design & UX
 
-* **Linguagem:** Python
-* **Framework Web:** Flask
-* **Consumo de API:** Biblioteca `requests`
-* **Front-end:** HTML/CSS (Templates Jinja2)
+Como um projeto feito de fã para fã, a interface recebeu atenção especial para ser fiel à identidade visual da franquia:
 
-## Estrutura do Projeto
+### 1. Identidade Visual Dinâmica
+As cores da interface adaptam-se automaticamente ao tipo do Pokémon. Foram criadas classes CSS específicas para cada um dos 18 tipos elementais (ex: `.type-fire`, `.type-water`), garantindo a imersão.
 
-A lógica da aplicação está separada em camadas:
+### 2. Modo Shiny ✨
+Implementação de um botão especial que permite alternar instantaneamente a visualização do Pokémon para a sua versão **Shiny**, carregando os sprites correspondentes.
 
-* **app/routes.py:** Gerencia as rotas web (`/`, `/search`, `/<pokemon>`) e renderiza os templates.
-* **app/services.py:** Contém a regra de negócio. Responsável por buscar dados na PokeAPI e processar o cálculo de fraquezas.
-* **app/templates:** Arquivos HTML da interface.
-* **app/static:** Arquivos de estilo (CSS) e scripts (JS).
+### 3. Visualização de Stats
+Os atributos de batalha (HP, Ataque, Defesa, etc.) são exibidos através de **barras de progresso coloridas**, facilitando a leitura rápida do potencial do Pokémon.
 
-## Instalação e Execução
+### 4. Busca Inteligente
+O sistema conta com um autocomplete customizado que exibe sugestões com **miniaturas** dos Pokémon enquanto digita.
+---
+
+## 🧠 Lógica e Back-end
+
+O diferencial técnico deste projeto está no processamento de dados no servidor:
+
+* **Calculadora de Fraquezas Reais:** Diferente de muitas Pokédex que mostram apenas os tipos, este sistema cruza os dados de defesa (dano x2, x0.5, x0) de *todos* os tipos do Pokémon.
+    * *Exemplo:* Um Charizard (Fogo/Voador) recebe dano x4 de Pedra. O algoritmo em Python calcula isso automaticamente e exibe apenas o multiplicador final.
+* **Otimização com Cache:** Para garantir performance e respeitar os limites da API pública, a lista de todos os Pokémon e os dados de tipos são cacheados em memória na primeira execução.
+* **Tratamento de Erros:** Páginas personalizadas para erros 404 (Pokémon não encontrado) e 500 (Erro de API).
+
+## 🚀 Como Executar
 
 ### Pré-requisitos
-* Python 3 instalado.
+* Python 3.x instalado.
 
 ### Passo a Passo
 
-1.  Clone o repositório ou baixe os arquivos.
-2.  Instale as dependências necessárias:
+1.  Clone este repositório.
+2.  Instale as dependências:
     ```bash
     pip install flask requests
     ```
@@ -43,17 +53,22 @@ A lógica da aplicação está separada em camadas:
     ```bash
     python run.py
     ```
-4.  Acesse no navegador: `http://localhost:5000`
+4.  Abra no seu navegador: `http://localhost:5000`
 
-## Lógica de Cálculo de Fraquezas
+## 📸 Screenshots
 
-O sistema consulta as relações de dano de cada tipo do Pokémon (ex: Fogo, Voador) e multiplica os fatores:
-* **Double Damage From:** Multiplicador x2.0
-* **Half Damage From:** Multiplicador x0.5
-* **No Damage From:** Multiplicador x0.0
+| Página Inicial (Busca) | Detalhes do Pokémon |
+|:---:|:---:|
+| <img width="1481" height="928" alt="image" src="https://github.com/user-attachments/assets/928a396b-c567-49a6-87c1-d0cdd4af57fd" />
+| <img width="1481" height="928" alt="image" src="https://github.com/user-attachments/assets/0615aa93-7bf8-44f5-8fe2-ce60d5a8a67c" />
+|
 
-No final, são exibidos apenas os tipos que resultam num multiplicador maior que 1.0 (fraquezas reais).
+## 🛠 Tecnologias Utilizadas
 
-## Autoria
+* **Back-end:** Python, Flask, Requests.
+* **Front-end:** HTML5, CSS3 (Grid & Flexbox), JavaScript.
+* **Dados:** [PokeAPI v2](https://pokeapi.co/).
 
-Projeto pessoal desenvolvido por João Pedro Balbino Santos Souza.
+## ✒️ Autoria
+
+Desenvolvido com ❤️ e ☕ por **João Pedro Balbino Santos Souza**.
