@@ -59,9 +59,7 @@ O diferencial técnico deste projeto está no processamento de dados no servidor
 
 | Página Inicial (Busca) | Detalhes do Pokémon |
 |:---:|:---:|
-| <img width="1481" height="928" alt="image" src="https://github.com/user-attachments/assets/928a396b-c567-49a6-87c1-d0cdd4af57fd" />
-| <img width="1481" height="928" alt="image" src="https://github.com/user-attachments/assets/0615aa93-7bf8-44f5-8fe2-ce60d5a8a67c" />
-|
+| <img width="1481" height="928" alt="image" src="https://github.com/user-attachments/assets/928a396b-c567-49a6-87c1-d0cdd4af57fd" /> | <img width="1481" height="928" alt="image" src="https://github.com/user-attachments/assets/0615aa93-7bf8-44f5-8fe2-ce60d5a8a67c" />|
 
 ## 🛠 Tecnologias Utilizadas
 
